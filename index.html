@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Forget 🥺</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(135deg,#ffe5ec,#e8ddff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.page{
+  display:none;
+  width:100%;
+  max-width:480px;
+  padding:20px;
+  text-align:center;
+  animation:fade .5s ease;
+}
+.page.active{display:block}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+
+h1,h2{
+  font-family:'Playfair Display',serif;
+  color:#7a003c;
+}
+
+.btn{
+  margin-top:20px;
+  padding:14px 22px;
+  font-size:1rem;
+  border:none;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ff8fab,#ffb3c6);
+  color:#fff;
+  box-shadow:0 0 15px rgba(255,143,171,.6);
+}
+
+/* floating hearts */
+.heart-float{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:float 8s linear infinite;
+  opacity:.4;
+}
+@keyframes float{
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+/* lock */
+.lock-box{
+  background:#fff;
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+select{
+  padding:12px;
+  border-radius:14px;
+  font-size:1rem;
+  margin:6px;
+}
+
+/* envelope */
+.envelope-wrap{margin:30px auto}
+.envelope{
+  width:260px;
+  height:170px;
+  background:#f7c6d0;
+  position:relative;
+  border-radius:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  cursor:pointer;
+}
+.flap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#f2a6b8;
+  clip-path:polygon(0 0,100% 0,50% 55%);
+  transform-origin:top;
+  transition:transform .6s ease;
+}
+.envelope.open .flap{transform:rotateX(180deg)}
+.wax{
+  width:48px;
+  height:48px;
+  background:#b1124d;
+  border-radius:50%;
+  position:absolute;
+  bottom:45px;
+  left:50%;
+  transform:translateX(-50%);
+  box-shadow:inset 0 0 0 4px #e6a0b5;
+}
+
+/* letter */
+.letter{
+  background:#fff7fb;
+  border-radius:20px;
+  padding:24px;
+  border:2px solid #f4b6c8;
+  box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.heart{
+  font-size:2.4rem;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{50%{transform:scale(1.18)}}
+
+.hidden{
+  display:none;
+  margin-top:12px;
+  font-weight:600;
+}
+
+/* petals */
+.petal{
+  position:fixed;
+  top:-20px;
+  font-size:22px;
+  animation:petal 7s linear infinite;
+}
+@keyframes petal{
+  to{transform:translateY(120vh) rotate(360deg);opacity:0}
+}
+
+/* photos */
+.photo-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:20px 0;
+}
+.photo-grid img{
+  width:100%;
+  border-radius:14px;
+  box-shadow:0 8px 18px rgba(0,0,0,.2);
+}
+
+/* final */
+.final-card{
+  background:linear-gradient(180deg,#fff7fb,#ffe3ef);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 18px 40px rgba(0,0,0,.22);
+  border:2px solid #f6b4c9;
+}
+.final-heart{
+  font-size:5.2rem;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+}
+.replay-btn{
+  margin-top:18px;
+  padding:10px 18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#ffb3c6,#ffc2d1);
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOCK -->
+<div class="page active" id="lock">
+  <div class="lock-box">
+    <h2>Marriage Date 🔐</h2>
+    <select id="month">
+      <option>January</option><option>February</option><option>March</option>
+      <option>April</option><option>May</option><option>June</option>
+      <option>July</option><option>August</option><option>September</option>
+      <option>October</option><option>November</option><option>December</option>
+    </select>
+    <select id="day">
+      <option>1</option><option>2</option><option>3</option><option>4</option>
+      <option>5</option><option>6</option><option>7</option><option>8</option>
+      <option>9</option><option>10</option><option>11</option><option>12</option>
+      <option>13</option><option>14</option><option>15</option><option>16</option>
+      <option>17</option><option>18</option><option>19</option><option>20</option>
+      <option>21</option><option>22</option><option>23</option><option>24</option>
+      <option>25</option><option>26</option><option>27</option><option>28</option>
+      <option>29</option><option>30</option><option>31</option>
+    </select>
+    <button class="btn" onclick="unlock()">Unlock 💗</button>
+  </div>
+</div>
+
+<!-- ENVELOPE -->
+<div class="page" id="env">
+  <h1>For Forget 🥺</h1>
+  <div class="envelope-wrap">
+    <div class="envelope" onclick="toggleFlap()">
+      <div class="flap"></div>
+      <div class="wax"></div>
+    </div>
+  </div>
+  <button class="btn" onclick="go('letter')">Open envelope ✉️</button>
+</div>
+
+<!-- LETTER -->
+<div class="page" id="letter">
+  <div class="letter">
+    <p><b>Dear forget,</b><br><br>
+    I thought I make u smth since I can't get you a real gift. This shall do cuz u deserve some love on this day!
+    So me little Sam thank you for being a sweet and kind friend to me I appreciate it and I appreciate u tooooo.
+    Keep being the VERY RARE special person you are and I hope you like this virtual gift from me to u :)
+    </p>
+    <p style="font-size:.9rem;color:#888">⬇️ Click the heart</p>
+    <div class="heart" onclick="document.getElementById('hiddenMsg').style.display='block'">💖</div>
+    <div class="hidden" id="hiddenMsg">Remember u are loved 💗</div>
+  </div>
+  <button class="btn" onclick="go('music')">Continue 💌</button>
+</div>
+
+<!-- MUSIC -->
+<div class="page" id="music">
+  <h2>A song u let me hear that fits today's day well not exactly but I picked it out bc it's good!</h2>
+  <iframe width="100%" height="215"
+    src="https://www.youtube.com/embed/nMsZ6wkZWhA"
+    allow="autoplay; encrypted-media"
+    allowfullscreen></iframe>
+  <button class="btn" onclick="go('photos')">Next 💞</button>
+</div>
+
+<!-- PHOTOS -->
+<div class="page" id="photos">
+  <h2>Memories 💞</h2>
+  <div class="photo-grid">
+    <img src="photo1.png">
+    <img src="photo2.jpg">
+    <img src="photo3.png">
+  </div>
+  <p>
+    I enjoy playing roblox with u, watching movies together and I really liked that day we listen to music together!!
+    I hope we get to play, watch movie, and listen to music some more together this year hopefully more vc toooo!
+  </p>
+  <button class="btn" onclick="go('final')">One last thing 💖</button>
+</div>
+
+<!-- FINAL -->
+<div class="page" id="final">
+  <div class="final-card">
+    <h1>Happy Valentine’s 💗</h1>
+    <p>Tap the heart</p>
+    <div class="final-heart" onclick="revealFinal()">❤️</div>
+    <div class="hidden" id="finalMsg">
+      I like your pp and I think about eating it 😳, just had to tease you,
+      u so hot 😩❤️, ANYWAY Thank you for being here for me and I will continue
+      to be here for u as well! Happy Valentines day
+    </div>
+    <button class="btn replay-btn" onclick="replayGift()">Replay 💞</button>
+  </div>
+</div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function unlock(){
+  if(month.value==='September' && day.value==='7'){
+    go('env');
+  } else {
+    alert('Try again 💭');
+  }
+}
+
+function toggleFlap(){
+  document.querySelector('.envelope').classList.toggle('open');
+}
+
+function revealFinal(){
+  document.getElementById('finalMsg').style.display='block';
+  for(let i=0;i<25;i++){ 
+    let p=document.createElement('div');
+    p.className='petal';
+    p.textContent='🌸';
+    p.style.left=Math.random()*100+'vw';
+    p.style.animationDuration=5+Math.random()*4+'s';
+    document.body.appendChild(p);
+  }
+}
+
+function replayGift(){
+  document.querySelectorAll('.hidden').forEach(el=>el.style.display='none');
+  go('lock');
+}
+
+setInterval(()=>{
+  let h=document.createElement('div');
+  h.className='heart-float';
+  h.textContent='💗';
+  h.style.left=Math.random()*100+'vw';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},1000);
+</script>
+
+</body>
+</html>
